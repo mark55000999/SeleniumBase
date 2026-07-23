@@ -2188,6 +2188,8 @@ class CDPMethods():
         driver = self.driver
         if hasattr(driver, "cdp_base"):
             driver = driver.cdp_base
+        self.loop.run_until_complete(driver.connection.send(mycdp.browser.close()))
+        time.sleep(1.0 if "win32" in sys.platform else 0.2)
         driver.quit()
 
     def _on_a_cf_turnstile_page(self, source=None):
